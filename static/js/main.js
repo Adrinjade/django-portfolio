@@ -60,4 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
   });
+
+  // Project detail toggles
+  document.querySelectorAll('.project-toggle').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = btn.getAttribute('data-target');
+      const panel = document.getElementById(id);
+      if (!panel) return;
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (!expanded) {
+        panel.classList.add('open');
+        // set max-height based on scrollHeight to animate smoothly
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        panel.focus && panel.focus();
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        // force reflow
+        void panel.offsetHeight;
+        panel.style.maxHeight = '0px';
+        panel.classList.remove('open');
+      }
+    });
+  });
 });
