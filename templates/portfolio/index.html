@@ -214,8 +214,23 @@
           {% if project.description %}
             <p>{{ project.description|truncatewords:30 }}</p>
           {% endif %}
+          <div style="margin-top:12px; display:flex; gap:12px; align-items:center;">
+            {% if project.link %}
+              <a href="{{ project.link }}" target="_blank" class="cta-button secondary" style="padding:8px 12px;">View Project →</a>
+            {% endif %}
+            <button class="project-toggle" data-target="project-{{ project.id }}-detail" aria-expanded="false" aria-controls="project-{{ project.id }}-detail">Details</button>
+          </div>
+        </div>
+
+        <div id="project-{{ project.id }}-detail" class="project-detail" tabindex="-1" aria-hidden="true">
+          {% if project.description %}
+            <p>{{ project.description }}</p>
+          {% endif %}
+          {% if project.technologies.all %}
+            <p><strong>Technologies:</strong> {% for tech in project.technologies.all %}{{ tech.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+          {% endif %}
           {% if project.link %}
-            <a href="{{ project.link }}" target="_blank">View Project →</a>
+            <p><a href="{{ project.link }}" target="_blank">Open project link</a></p>
           {% endif %}
         </div>
       </li>
