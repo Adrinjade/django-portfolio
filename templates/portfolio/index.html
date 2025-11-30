@@ -13,13 +13,35 @@
     </div>
   </div>
 
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <section class="about-us reveal">
+    <h2>About Us</h2>
+    <p>We are a collaborative group of designers, developers, and game-makers focused on building beautiful, performant, and accessible products. Our team blends frontend design, backend engineering, game development, and creative tooling to deliver end-to-end solutions. We value clear communication, testable code, and iterative design.</p>
+
+    <div class="counters" aria-hidden="false">
+      <div class="counter">
+        <div class="num" data-target="{{ projects|length }}">{{ projects|length }}</div>
+        <div class="label">Projects</div>
+      </div>
+      <div class="counter">
+        <div class="num" data-target="{{ people|length }}">{{ people|length }}</div>
+        <div class="label">Team Members</div>
+      </div>
+      <div class="counter">
+        <div class="num" data-target="5">5</div>
+        <div class="label">Years (est.)</div>
+      </div>
+    </div>
+  </section>
+
   {# Team Members Section #}
   {% if people %}
     <div class="about">
       <h2>Meet Our Team</h2>
       <div class="team-grid">
         {% for person in people %}
-          <div class="team-card">
+          <div class="team-card reveal">
             {% if person.photo %}
               <div class="team-photo">
                 <img src="{{ person.photo.url }}" alt="{{ person.name }}" class="team-image">
@@ -169,9 +191,9 @@
     {% endif %}
   </div>
 
-  <ul class="projects" id="projects">
+    <ul class="projects" id="projects">
     {% for project in projects %}
-      <li class="project-item">
+      <li class="project-item reveal">
         {% if project.image %}
           <div class="project-image">
             <img src="{{ project.image.url }}" alt="{{ project.title }}">
