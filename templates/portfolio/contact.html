@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact — Portfolio{% endblock %}
+
+{% block content %}
+  <h2>Get In Touch</h2>
+  
+  <div class="contact-page-wrapper">
+    <div class="contact-form">
+      <h3>Send Us a Message</h3>
+      <form method="post">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    {% if people %}
+      <div class="contact-info-panel">
+        <h3>Contact Information</h3>
+        
+        {% for person in people %}
+          <div class="person-contact-group">
+            <h4>{{ person.name }}</h4>
+            
+            {% if person.contact_number %}
+              <div class="contact-info-item">
+                <span class="contact-icon">📱</span>
+                <div>
+                  <p class="contact-label">Phone</p>
+                  <p class="contact-value">
+                    <a href="tel:{{ person.contact_number }}">{{ person.contact_number }}</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.email_primary %}
+              <div class="contact-info-item">
+                <span class="contact-icon">📧</span>
+                <div>
+                  <p class="contact-label">Primary Email</p>
+                  <p class="contact-value">
+                    <a href="mailto:{{ person.email_primary }}">{{ person.email_primary }}</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.email_secondary %}
+              <div class="contact-info-item">
+                <span class="contact-icon">📧</span>
+                <div>
+                  <p class="contact-label">Secondary Email</p>
+                  <p class="contact-value">
+                    <a href="mailto:{{ person.email_secondary }}">{{ person.email_secondary }}</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.facebook %}
+              <div class="contact-info-item">
+                <span class="contact-icon">👍</span>
+                <div>
+                  <p class="contact-label">Facebook</p>
+                  <p class="contact-value">{{ person.facebook }}</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.instagram %}
+              <div class="contact-info-item">
+                <span class="contact-icon">📸</span>
+                <div>
+                  <p class="contact-label">Instagram</p>
+                  <p class="contact-value">@{{ person.instagram }}</p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.github %}
+              <div class="contact-info-item">
+                <span class="contact-icon">💻</span>
+                <div>
+                  <p class="contact-label">GitHub</p>
+                  <p class="contact-value">
+                    <a href="{{ person.github }}" target="_blank">View Profile</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.linkedin %}
+              <div class="contact-info-item">
+                <span class="contact-icon">💼</span>
+                <div>
+                  <p class="contact-label">LinkedIn</p>
+                  <p class="contact-value">
+                    <a href="{{ person.linkedin }}" target="_blank">View Profile</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if person.twitter %}
+              <div class="contact-info-item">
+                <span class="contact-icon">🐦</span>
+                <div>
+                  <p class="contact-label">Twitter</p>
+                  <p class="contact-value">
+                    <a href="{{ person.twitter }}" target="_blank">View Profile</a>
+                  </p>
+                </div>
+              </div>
+            {% endif %}
+            
+            {% if not forloop.last %}
+              <hr style="margin: 24px 0; border: none; border-top: 1px solid rgba(15, 23, 36, 0.1);">
+            {% endif %}
+          </div>
+        {% endfor %}
+        
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Fill out the form and we'll get back to you as soon as possible.</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

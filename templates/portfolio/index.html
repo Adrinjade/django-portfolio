@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}Home — Our Portfolio{% endblock %}
+
+{% block content %}
+  {# Unified Hero Section #}
+  <div class="hero-section">
+    <h2>Our Portfolio</h2>
+    <p class="hero-bio">A collaborative team of developers creating innovative web and software solutions</p>
+    <div class="hero-cta">
+      <a href="/contact/" class="cta-button primary">Get In Touch</a>
+      <a href="#projects" class="cta-button secondary">View Projects</a>
+    </div>
+  </div>
+
+  {# Team Members Section #}
+  {% if people %}
+    <div class="about">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        {% for person in people %}
+          <div class="team-card">
+            {% if person.photo %}
+              <div class="team-photo">
+                <img src="{{ person.photo.url }}" alt="{{ person.name }}" class="team-image">
+              </div>
+            {% endif %}
+            <div class="team-card-header">
+              <h3>{{ person.name }}</h3>
+            </div>
+            
+            {% if person.bio %}
+              <p class="team-bio">{{ person.bio }}</p>
+            {% endif %}
+
+            {% if person.contact_number or person.email_primary or person.facebook %}
+              <div class="team-contact">
+                {% if person.contact_number %}
+                  <div class="team-contact-item">
+                    <span class="icon">📱</span>
+                    <a href="tel:{{ person.contact_number }}">{{ person.contact_number }}</a>
+                  </div>
+                {% endif %}
+                {% if person.email_primary %}
+                  <div class="team-contact-item">
+                    <span class="icon">📧</span>
+                    <a href="mailto:{{ person.email_primary }}">Email</a>
+                  </div>
+                {% endif %}
+                {% if person.facebook %}
+                  <div class="team-contact-item">
+                    <span class="icon">👍</span>
+                    <span>{{ person.facebook }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if person.skills.all %}
+              <div class="team-skills">
+                {% for skill in person.skills.all %}
+                  <span class="skill-badge">{{ skill.name }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            {% if person.education.all %}
+              <div class="team-education">
+                <h4 style="margin-top: 12px; margin-bottom: 8px; font-size: 0.9rem; color: var(--primary); font-weight: 600;">Education</h4>
+                {% for edu in person.education.all %}
+                  <div style="font-size: 0.85rem; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #e0e0e0;">
+                    <p style="margin: 0; font-weight: 500;">{{ edu.program }}</p>
+                    <p style="margin: 2px 0; color: var(--text-light);">{{ edu.school }}</p>
+                    <p style="margin: 0; color: var(--text-light); font-size: 0.8rem;">Graduated: {{ edu.graduation_year }}</p>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+
+      {# Combined Skills Section #}
+      {% if skills %}
+        <div class="skills-section" style="margin-top: 40px; padding-top: 40px; border-top: 2px solid rgba(15, 23, 36, 0.1);">
+          <h3>Technical Skills</h3>
+          <ul class="skills-list">
+            {% for skill in skills %}
+              <li>{{ skill.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if experiences %}
+    <h2>Experience</h2>
+    <div class="timeline">
+      {% for exp in experiences %}
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h3>{{ exp.title }}</h3>
+            <p class="timeline-company">{{ exp.company }}
+              {% if exp.is_current %}
+                <span class="badge">Current</span>
+              {% endif %}
+            </p>
+            <p class="timeline-date">
+              {{ exp.start_date|date:"b Y" }} -
+              {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"b Y" }}{% endif %}
+            </p>
+            {% if exp.description %}
+              <p>{{ exp.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if education %}
+    <h2>Education</h2>
+    <div class="education-list">
+      {% for edu in education %}
+        <div class="education-item">
+          <h3>{{ edu.program }}</h3>
+          <p class="education-school">{{ edu.school }}</p>
+          <p class="education-year">Graduated: <strong>{{ edu.graduation_year }}</strong></p>
+          {% if edu.description %}
+            <p>{{ edu.description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <h2>Projects</h2>
+  
+  <div class="projects-controls">
+    <form method="get" class="search-form">
+      <input 
+        type="text" 
+        name="q" 
+        placeholder="Search projects..." 
+        value="{{ search_query }}"
+        class="search-input"
+      >
+      <button type="submit" class="search-btn">Search</button>
+      {% if search_query %}
+        <a href="/" class="clear-search">Clear</a>
+      {% endif %}
+    </form>
+    
+    {% if categories %}
+      <div class="category-filter">
+        <select name="category" onchange="window.location.href=this.value" class="category-select">
+          <option value="">All Categories</option>
+          {% for cat in categories %}
+            {% if cat %}
+              <option value="?category={{ cat }}" {% if cat == selected_category %}selected{% endif %}>
+                {{ cat }}
+              </option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    {% endif %}
+  </div>
+
+  <ul class="projects" id="projects">
+    {% for project in projects %}
+      <li class="project-item">
+        {% if project.image %}
+          <div class="project-image">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}">
+          </div>
+        {% endif %}
+        <div class="project-content">
+          <h3><a href="{% url 'portfolio:project_detail' slug=project.slug %}">{{ project.title }}</a></h3>
+          {% if project.category %}
+            <p class="project-category">{{ project.category }}</p>
+          {% endif %}
+          {% if project.technologies.all %}
+            <div class="project-technologies">
+              {% for tech in project.technologies.all %}
+                <span class="tech-tag">{{ tech.name }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          {% if project.description %}
+            <p>{{ project.description|truncatewords:30 }}</p>
+          {% endif %}
+          {% if project.link %}
+            <a href="{{ project.link }}" target="_blank">View Project →</a>
+          {% endif %}
+        </div>
+      </li>
+    {% empty %}
+      <li class="project-item">
+        <p style="text-align: center; color: #999;">No projects found. Try adjusting your filters.</p>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if testimonials %}
+    <h2>Testimonials</h2>
+    <div class="testimonials">
+      {% for testimonial in testimonials %}
+        <div class="testimonial-card">
+          <div class="stars">
+            {% for i in "x"|rjust:testimonial.rating %}★{% endfor %}
+            {% for i in "x"|rjust:5|add:0|add:testimonial.rating|add:0 %}{% endfor %}
+          </div>
+          <blockquote>{{ testimonial.quote }}</blockquote>
+          <p class="testimonial-author">
+            <strong>{{ testimonial.client_name }}</strong>
+            {% if testimonial.role %}<br><small>{{ testimonial.role }}</small>{% endif %}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}
