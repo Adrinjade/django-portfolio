@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} — Portfolio{% endblock %}
+
+{% block content %}
+  <article class="project-detail">
+    <h2>{{ project.title }}</h2>
+    <div class="meta" style="color: #999; font-size: 0.9rem; margin-bottom: 24px;">
+      Added {{ project.created_at|date:"F d, Y" }}
+    </div>
+    <div class="description" style="font-size: 1.05rem; line-height: 1.8; color: #555; margin-bottom: 32px;">
+      {{ project.description|linebreaksbr }}
+    </div>
+    {% if project.link %}
+      <a href="{{ project.link }}" target="_blank" style="display: inline-block; color: #fff; background: linear-gradient(135deg, #0f1724 0%, #1a2a47 100%); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+        Visit Project →
+      </a>
+    {% endif %}
+  </article>
+{% endblock %}

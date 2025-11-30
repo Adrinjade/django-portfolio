@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="site-header">
+      <div class="container">
+        <div class="header-top">
+          <h1><a href="/">{% if people %}{{ people.0.name }}{% else %}My Portfolio{% endif %}</a></h1>
+          <nav class="social-links">
+            {% if people %}
+              {% for person in people %}
+                {% if person.github %}
+                  <a href="{{ person.github }}" target="_blank" title="{{ person.name }} GitHub" aria-label="{{ person.name }} GitHub">
+                    <span class="icon">⚙️</span>
+                  </a>
+                {% endif %}
+                {% if person.linkedin %}
+                  <a href="{{ person.linkedin }}" target="_blank" title="{{ person.name }} LinkedIn" aria-label="{{ person.name }} LinkedIn">
+                    <span class="icon">💼</span>
+                  </a>
+                {% endif %}
+                {% if person.twitter %}
+                  <a href="{{ person.twitter }}" target="_blank" title="{{ person.name }} Twitter" aria-label="{{ person.name }} Twitter">
+                    <span class="icon">𝕏</span>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </nav>
+        </div>
+        <nav class="site-nav">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="container" id="main-content">
+      {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="site-footer">
+      <div class="container">
+        <p>© {% if portfolio_info %}{{ portfolio_info.name }}{% else %}Your Name{% endif %} 2024 | All rights reserved</p>
+        <div class="footer-links">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </div>
+      </div>
+      <button class="scroll-to-top" id="scrollToTop" title="Scroll to top">↑</button>
+    </footer>
+
+    <script>
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.style.display = 'block';
+        } else {
+          scrollToTopBtn.style.display = 'none';
+        }
+      });
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>
