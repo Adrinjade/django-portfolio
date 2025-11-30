@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="site-header">
+      <div class="container">
+        <div class="header-top">
+          <h1><a href="/">My Portfolio</a></h1>
+          <nav class="social-links">
+            
+          </nav>
+        </div>
+        <nav class="site-nav">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="container" id="main-content">
+      
+<div class="gifthun-container">
+    <div class="gifthun-content">
+        <h1>Welcome to Gifthun</h1>
+        <p>This is the Gifthun landing page.</p>
+        <a href="/portfolio/" class="btn btn-primary">View Portfolio</a>
+    </div>
+</div>
+
+<style>
+    .gifthun-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .gifthun-content {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .gifthun-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+    }
+    
+    .gifthun-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary {
+        background-color: white;
+        color: #667eea;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+    </main>
+    
+    <footer class="site-footer">
+      <div class="container">
+        <p>© Your Name 2024 | All rights reserved</p>
+        <div class="footer-links">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </div>
+      </div>
+      <button class="scroll-to-top" id="scrollToTop" title="Scroll to top">↑</button>
+    </footer>
+
+    <script>
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.style.display = 'block';
+        } else {
+          scrollToTopBtn.style.display = 'none';
+        }
+      });
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>

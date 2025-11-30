@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project Management Tool — Portfolio</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+  </head>
+  <body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="site-header">
+      <div class="container">
+        <div class="header-top">
+          <h1><a href="/">My Portfolio</a></h1>
+          <nav class="social-links">
+            
+          </nav>
+        </div>
+        <nav class="site-nav">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </nav>
+      </div>
+    </header>
+    
+    <main class="container" id="main-content">
+      
+  <article class="project-detail">
+    <h2>Project Management Tool</h2>
+    <div class="meta" style="color: #999; font-size: 0.9rem; margin-bottom: 24px;">
+      Added November 29, 2025
+    </div>
+    <div class="description" style="font-size: 1.05rem; line-height: 1.8; color: #555; margin-bottom: 32px;">
+      A collaborative project management application with real-time updates using WebSockets. Features task boards, team collaboration, file sharing, and progress tracking. Built with Django and Vue.js.
+    </div>
+    
+      <a href="https://github.com/yourusername/project-management-tool" target="_blank" style="display: inline-block; color: #fff; background: linear-gradient(135deg, #0f1724 0%, #1a2a47 100%); padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+        Visit Project →
+      </a>
+    
+  </article>
+
+    </main>
+    
+    <footer class="site-footer">
+      <div class="container">
+        <p>© Your Name 2024 | All rights reserved</p>
+        <div class="footer-links">
+          <a href="/">Home</a> | <a href="/contact/">Contact</a>
+        </div>
+      </div>
+      <button class="scroll-to-top" id="scrollToTop" title="Scroll to top">↑</button>
+    </footer>
+
+    <script>
+      // Scroll to top button
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          scrollToTopBtn.style.display = 'block';
+        } else {
+          scrollToTopBtn.style.display = 'none';
+        }
+      });
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>
