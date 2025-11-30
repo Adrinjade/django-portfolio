@@ -10,7 +10,7 @@ class Command(BaseCommand):
         aldrin, created = Person.objects.get_or_create(
             pk=1,
             defaults={
-                'name': 'Aldrin Jade Gc Saura',
+                'name': 'Welcome',
                 'contact_number': '09193213033',
                 'email_primary': 'Aldrinjadesaura11@gmail.com',
                 'email_secondary': 'aldrinjade.s11@yahoo.com',
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             }
         )
         if not created:
-            aldrin.name = 'Aldrin Jade Gc Saura'
+            aldrin.name = 'Welcome'
             aldrin.contact_number = '09193213033'
             aldrin.email_primary = 'Aldrinjadesaura11@gmail.com'
             aldrin.email_secondary = 'aldrinjade.s11@yahoo.com'

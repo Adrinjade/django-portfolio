@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(default="Aldrin Jade Gc Saura", max_length=200),
+                    models.CharField(default="Welcome", max_length=200),
                 ),
                 (
                     "contact_number",
