@@ -9,26 +9,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    
-    - name: Run migrations
-      run: python manage.py migrate
-    
-    - name: Export static site
-      run: python export_static.py
-    
+
+    # We already generate and commit the static site into `docs/` locally.
+    # Publishing `./docs` directly avoids running Django in the CI runner
+    # and prevents database/migration related failures.
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
